@@ -25,11 +25,13 @@ jobs:
 
       - name: Install dependencies & Build Web App
         run: |
+          cd pro-titanic-soccer
           npm install
           npm run build
 
       - name: Configure Capacitor & Build Android Project
         run: |
+          cd pro-titanic-soccer
           npm install @capacitor/core @capacitor/cli @capacitor/android
           npx cap init "Pro Titanic Soccer" "com.srstudio.protitanicsoccer" --web-dir=dist
           npx cap add android
@@ -37,11 +39,12 @@ jobs:
 
       - name: Lock Landscape Orientation
         run: |
+          cd pro-titanic-soccer
           sed -i 's/android:name=".MainActivity"/android:name=".MainActivity" android:screenOrientation="sensorLandscape"/g' android/app/src/main/AndroidManifest.xml
 
       - name: Build Debug APK
         run: |
-          cd android
+          cd pro-titanic-soccer/android
           chmod +x gradlew
           ./gradlew assembleDebug
 
@@ -49,4 +52,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Pro-Titanic-Soccer-Offline-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: pro-titanic-soccer/android/app/build/outputs/apk/debug/app-debug.apk
