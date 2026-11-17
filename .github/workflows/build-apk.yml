@@ -26,13 +26,13 @@ jobs:
       - name: Install dependencies & Build Web App
         run: |
           cd pro-titanic-soccer
-          npm install
+          npm install --legacy-peer-deps
           npm run build
 
       - name: Configure Capacitor & Build Android Project
         run: |
           cd pro-titanic-soccer
-          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npm install --legacy-peer-deps @capacitor/core @capacitor/cli @capacitor/android
           npx cap init "Pro Titanic Soccer" "com.srstudio.protitanicsoccer" --web-dir=dist
           npx cap add android
           npx cap sync android
