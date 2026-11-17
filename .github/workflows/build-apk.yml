@@ -47,6 +47,15 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      - name: Fix Duplicate Kotlin Classes
+        run: |
+          cd pro-titanic-soccer/android/app
+          echo "" >> build.gradle
+          echo "configurations.all {" >> build.gradle
+          echo "    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'" >> build.gradle
+          echo "    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'" >> build.gradle
+          echo "}" >> build.gradle
+
       - name: Lock Landscape Orientation
         run: |
           cd pro-titanic-soccer
