@@ -33,7 +33,18 @@ jobs:
         run: |
           cd pro-titanic-soccer
           npm install --legacy-peer-deps @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init "Pro Titanic Soccer" "com.srstudio.protitanicsoccer" --web-dir=dist
+          
+          # Create a clean JSON config to avoid TypeScript parsing issues
+          echo '{
+            "appId": "com.srstudio.protitanicsoccer",
+            "appName": "Pro Titanic Soccer",
+            "webDir": "dist",
+            "bundledWebRuntime": false,
+            "android": {
+              "allowMixedContent": true
+            }
+          }' > capacitor.config.json
+          
           npx cap add android
           npx cap sync android
 
